@@ -1,0 +1,33 @@
+html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video {
+  border:0;
+  font:inherit;
+  font-size:100%;
+  margin:0;
+  padding:0;
+  vertical-align:baseline;
+}
+
+.total {
+	background-color: #181a1b;
+	color: #e8e6e3;
+	font-size: 16px;
+}
+
+.container {
+	font-size: 1em;
+	line-height: 1.4em;
+	margin-bottom: 2px solid;
+}
+
+.mainContent {
+	background: #f3f3f3;
+	margin: 30px auto;
+	max-width: 1040px;
+	width: 90%;
+}
+
+.dateDetail {
+	font-size: 0.8em;
+	font-style: italic;
+	margin-bottom: 3px;
+}
