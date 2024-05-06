@@ -9,33 +9,47 @@ html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address
 article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
   display:block;
 }
-
+html, body {
+  background: #181818;
+  font-family: 'Lato', helvetica, arial, sans-serif;
+  font-size: 16px;
+  color: #222;
+}
 h1 {
 	font-size: 2.5em;
 	font-weight: bold;
+	margin-bottom: 20px;
 }
 h2 {
 	font-size: 2em;
 	font-weight: bold;
+	margin-top: 3px;
+	margin-bottom: 3px;
 }
 h3 {
 	font-size: 1.5em;
 	font-weight: bold;
+	margin-top: 3px;
+	margin-bottom: 3px;
 }
 h4 {
 	font-size: 1.5em;
 	font-weight: bold;
+	margin-bottom: 3px;
 }
 h5 {
 	font-size: 1.25em;
 	font-weight: bold;
+	margin-bottom: 3px;
 }
 h6 {
 	font-size: 1.11em;
 	font-weight: bold;
+	margin-bottom: 3px;
 }
 p {
 	font-size: 1em;
+	margin-bottom: 3px;
 }
 lu {
 	list-style-type: none;
@@ -58,10 +72,11 @@ section {
 	font-size: 16px;
 }
 
-.container {
+.heading {
 	line-height: 1.4em;
 	margin:	30px;
 	margin-bottom: 2px solid;
+	padding: 7px;
 }
 
 .mainContent {
@@ -73,6 +88,7 @@ section {
 .dateDetail {
 	font-size: 0.8em;
 	font-style: italic;
+	margin-top: 3px;
 	margin-bottom: 3px;
 }
 
@@ -84,4 +100,5 @@ section {
 .sectionContent {
 	float: right;
 	width: 72.5%;
+	margin-bottom: 15px;
 }
