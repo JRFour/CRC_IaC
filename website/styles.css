@@ -1,0 +1,104 @@
+html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video {
+  border:0;
+  font:inherit;
+  font-size:100%;
+  margin:0;
+  padding:0;
+  vertical-align:baseline;
+}
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
+  display:block;
+}
+html, body {
+  background: #181818;
+  font-family: 'Lato', helvetica, arial, sans-serif;
+  font-size: 16px;
+  color: #222;
+}
+h1 {
+	font-size: 2.5em;
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+h2 {
+	font-size: 2em;
+	font-weight: bold;
+	margin-top: 3px;
+	margin-bottom: 3px;
+}
+h3 {
+	font-size: 1.5em;
+	font-weight: bold;
+	margin-top: 3px;
+	margin-bottom: 3px;
+}
+h4 {
+	font-size: 1.5em;
+	font-weight: bold;
+	margin-bottom: 3px;
+}
+h5 {
+	font-size: 1.25em;
+	font-weight: bold;
+	margin-bottom: 3px;
+}
+h6 {
+	font-size: 1.11em;
+	font-weight: bold;
+	margin-bottom: 3px;
+}
+p {
+	font-size: 1em;
+	margin-bottom: 3px;
+}
+lu {
+	list-style-type: none;
+}
+section {
+  border-top: 1px solid #dedede;
+  padding: 20px 0 0;
+}
+
+.clear {
+	clear: both;
+}
+
+.total {
+	background-color: #181a1b;
+	color: #e8e6e3;
+  margin: 30px auto;
+  max-width: 1040px;
+  width: 90%;
+	font-size: 16px;
+}
+
+.heading {
+	line-height: 1.4em;
+	margin:	30px;
+	margin-bottom: 2px solid;
+	padding: 7px;
+}
+
+.mainContent {
+	margin: 30px auto;
+	max-width: 1040px;
+	width: 90%;
+}
+
+.dateDetail {
+	font-size: 0.8em;
+	font-style: italic;
+	margin-top: 3px;
+	margin-bottom: 3px;
+}
+
+.sectionTitle {
+	float: left;
+	width: 25%;
+}
+
+.sectionContent {
+	float: right;
+	width: 72.5%;
+	margin-bottom: 15px;
+}
