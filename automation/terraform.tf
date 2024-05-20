@@ -23,3 +23,8 @@ terraform {
   }
 }
 
+module "iam-user" {
+  source  = "terraform-aws-modules/iam/aws"
+  version = "5.39.1"
+}
+
