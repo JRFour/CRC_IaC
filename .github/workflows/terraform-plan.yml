@@ -1,7 +1,8 @@
 name: "Terraform Plan"
 
 on:
-  pull_request:
+  push:
+#pull_request:
 
 jobs:
   terraform:
@@ -20,7 +21,6 @@ jobs:
       - name: "Terraform Init"
         run: |
           terraform init
-
       - name: "Terraform Plan"
         run: |
           terraform plan -no-color
