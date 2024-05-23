@@ -5,56 +5,29 @@ on:
     branches:
       - main
 
-env:
-  TF_CLOUD_ORGANIZATION: "JR4_AWS_Testing"
-  TF_API_TOKEN: "${{ secrets.TF_API_TOKEN }}"
-  TF_WORKSPACE: "CloudRC_Static_Website"
-  CONFIG_DIRECTORY: "./"
-
 jobs:
   terraform:
     name: "Terraform Apply"
     runs-on: self-hosted
     permissions:
       contents: read
+      pull-requests: write
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Upload Configuration
-        uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.3.0
-        id: apply-upload
-        with:
-          workspace: ${{ env.TF_WORKSPACE }}
-          directory: ${{ env.CONFIG_DIRECTORY }}
-
-      - name: Create Apply Run
-        uses: hashicorp/tfc-workflows-github/actions/create-run@v1.3.0
-        id: apply-run
-        with:
-          workspace: ${{ env.TF_WORKSPACE }}
-          configuration_version: ${{ steps.apply-upload.outputs.configuration_version_id }}
-
-      - name: Apply
-        uses: hashicorp/tfc-workflows-github/actions/apply-run@v1.3.0
-        if: fromJSON(steps.apply-run.outputs.payload).data.attributes.actions.IsConfirmable
-        id: apply
-        with:
-          run: ${{ steps.apply-run.outputs.run_id }}
-          comment: "Apply Run from GitHub Actions CI ${{ github.sha }}"
-
-  deploy:
-    needs: terraform
-    runs-on: self-hosted
-    steps:
-      - name: Checkout
+      - name: "Checkout"
         uses: actions/checkout@v4
-      - name: Setup AWS CLI
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-            aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-            aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY_ID }}
-            aws-region: us-east-1
-      - name: Sync files to S3 bucket
+
+      - name: "Setup Terraform"
+        uses: hashicorp/setup-terraform@v3
+
+      - name: "Terraform Init"
         run: |
-          aws s3 sync website/ s3://static.realewanderer.net --delete
+          terraform init
+
+      - name: "Terraform Plan"
+        run: |
+          terraform plan -no-color
+         continue-on-error: true
+
+      - name: "Terraform Apply"
+        run: |
+          terraform apply -auto-approve
