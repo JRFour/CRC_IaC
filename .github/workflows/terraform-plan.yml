@@ -1,17 +1,17 @@
 name: "Terraform Plan"
 
 on:
-  push:
-#pull_request:
-
-permissions:
-  contents: read
-  pull-requests: write
+  pull_request:
 
 jobs:
-  terraform:
-  #  name: "Terraform Plan"
+  terraform-plan:
+    name: "Terraform Plan"
     runs-on: self-hosted
+
+    permissions:
+      contents: read
+      pull-requests: write
+
     steps:
       - name: "Checkout"
         uses: actions/checkout@v4
