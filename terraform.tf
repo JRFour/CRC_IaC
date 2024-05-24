@@ -1,10 +1,10 @@
 terraform {
-  cloud {
-    organization = "JR4_AWS_Testing"
-    workspaces {
-      name = "CloudRC_Static_Website"
-    }
-  }
+#  cloud {
+#    organization = "JR4_AWS_Testing"
+#    workspaces {
+#      name = "CloudRC_Static_Website"
+#    }
+#  }
 
 
   required_providers {
