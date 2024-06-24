@@ -23,8 +23,8 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       with:
         args: >
-          -Dsonar.organization=jrfour-devsecops
-          -Dsonar.projectKey=jrfour-devsecops_dev
+          -Dsonar.organization=jrfour-cloudrc
+          -Dsonar.projectKey=jrfour-cloudrc_challenge
           
   # Runs Snyk for SCA (Software Composition Analysis) in IaC
   snyk_sca:
