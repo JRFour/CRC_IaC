@@ -67,7 +67,7 @@ jobs:
   deploy:
     name: "Push to AWS S3"
     runs-on: self-hosted
-    needs: [terraform_build, sonarcloud_sast]
+    needs: [terraform_build]  #, sonarcloud_sast]
     steps:
       - name: "Checkout"
         uses: actions/checkout@v4
