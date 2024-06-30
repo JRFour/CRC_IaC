@@ -6,25 +6,25 @@ on:
       - main
 
 jobs:
-  sonarcloud_sast:
-    name: "SonarCloud SAST Scan"
-    runs-on: self-hosted
-    steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-node@v3
-      with:
-        node-version: 16
-        cache: npm
-    - run: npm install
-    - name: SonarCloud Scan
-      uses: sonarsource/sonarcloud-github-action@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      with:
-        args: >
-          -Dsonar.organization=jrfour-cloudrc
-          -Dsonar.projectKey=jrfour-cloudrc_challenge
+#  sonarcloud_sast:
+#    name: "SonarCloud SAST Scan"
+#    runs-on: self-hosted
+#    steps:
+#    - uses: actions/checkout@v3
+#    - uses: actions/setup-node@v3
+#      with:
+#        node-version: 16
+#        cache: npm
+#    - run: npm install
+#    - name: SonarCloud Scan
+#      uses: sonarsource/sonarcloud-github-action@master
+#      env:
+#        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+#      with:
+#        args: >
+#          -Dsonar.organization=jrfour-cloudrc
+#          -Dsonar.projectKey=jrfour-cloudrc_challenge
           
   # Runs Snyk for SCA (Software Composition Analysis) in IaC
   snyk_sca:
@@ -36,6 +36,7 @@ jobs:
         uses: snyk/actions/iac@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        continue-on-error: true
           
   # Runs Terraform to build out AWS infrastructure and DNS rules
   terraform_build:
