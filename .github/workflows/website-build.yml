@@ -47,6 +47,7 @@ jobs:
       aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
       aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY_ID }}
       aws-region: us-east-1
+      domain_name: ${{ steps.apply.outputs.domain_name }}
     permissions:
       contents: read
       pull-requests: write
@@ -65,7 +66,10 @@ jobs:
         continue-on-error: true
 
       - name: "Terraform Apply"
+        id: apply
         run:  terraform apply -auto-approve
+
+      - name:
 
   # Pushes files in 'website' folder to S3 bucket
   deploy:
