@@ -75,7 +75,7 @@ jobs:
     runs-on: self-hosted
     needs: [terraform_build]  #, sonarcloud_sast]
     env:
-      domain_name: ${{ job.terraform_build.outputs.domain_name }}
+      domain_name: ${{ needs.terraform_build.outputs.domain_name }}
     steps:
       - name: "Checkout"
         uses: actions/checkout@v4
