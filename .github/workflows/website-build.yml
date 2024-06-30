@@ -68,9 +68,7 @@ jobs:
       - name: "Terraform Apply"
         id: apply
         run:  terraform apply -auto-approve
-
-      - name:
-
+        
   # Pushes files in 'website' folder to S3 bucket
   deploy:
     name: "Push to AWS S3"
