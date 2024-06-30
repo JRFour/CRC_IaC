@@ -43,6 +43,10 @@ jobs:
     name: "Terraform AWS Build"
     runs-on: self-hosted
     needs: snyk_sca
+    env:
+      aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY_ID }}
+      aws-region: us-east-1
     permissions:
       contents: read
       pull-requests: write
@@ -68,6 +72,8 @@ jobs:
     name: "Push to AWS S3"
     runs-on: self-hosted
     needs: [terraform_build]  #, sonarcloud_sast]
+    env:
+      domain_name: ${{ job.terraform_build.outputs.domain_name }}
     steps:
       - name: "Checkout"
         uses: actions/checkout@v4
@@ -79,7 +85,7 @@ jobs:
           aws-region: us-east-1
       - name: "Sync files to S3 bucket"
         run: |
-          aws s3 sync website/ s3://static.realewanderer.net --delete
+          aws s3 sync website/ s3://${{ env.domain_name }} --delete
 
   # Runs OWASP ZAP Scan for web vulnerabilities
   zap_scan:
