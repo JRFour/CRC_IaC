@@ -28,7 +28,7 @@ jobs:
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY_ID }}
-      PM_API_TOKEN_ID_B64: ${{ secrets.PM_API_TOKEN_ID_B64 }}
+      TFVARS_B64: ${{ secrets.TFVARS_B64 }}
       PM_API_TOKEN_SECRET: ${{ secrets.PM_API_TOKEN_SECRET }}
 
     permissions:
@@ -40,7 +40,7 @@ jobs:
 
       - shell: bash
         run: |
-          export TF_VAR_PM_API_TOKEN_ID=$(cat ${{ secrets.PM_API_TOKEN_B64 }} | base64 -d)
+          cat ${{ secrets.PM_API_TOKEN_B64 }} | base64 -d > terraform.tfvars
 
       - name: "Setup Terraform"
         uses: hashicorp/setup-terraform@v3
@@ -49,7 +49,7 @@ jobs:
         run: terraform init
 
       - name: "Terraform Plan"
-        run: terraform plan -no-color -var="PM_TOKEN_ID=$TF_VAR_PM_API_TOKEN_ID"
+        run: terraform plan -no-color
         continue-on-error: true
 
       - name: "Terraform Apply"
