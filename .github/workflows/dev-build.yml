@@ -30,7 +30,6 @@ jobs:
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY_ID }}
       PM_API_TOKEN_ID_B64: ${{ secrets.PM_API_TOKEN_ID_B64 }}
       PM_API_TOKEN_SECRET: ${{ secrets.PM_API_TOKEN_SECRET }}
-      PM_API_TOEKN_ID: $(cat ${{ secrets.PM_API_TOKEN_B64 }} | base64 -d)
 
     permissions:
       contents: read
@@ -38,6 +37,10 @@ jobs:
     steps:
       - name: "Checkout"
         uses: actions/checkout@v4
+
+      - shell: bash
+        run: |
+          export PM_API_TOKEN_ID=$(cat ${{ secrets.PM_API_TOKEN_B64 }} | base64 -d)
 
       - name: "Setup Terraform"
         uses: hashicorp/setup-terraform@v3
