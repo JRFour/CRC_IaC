@@ -19,8 +19,8 @@ resource "proxmox_lxc" "ct_instance" {
   }
 }
 
-resource "proxmox_vm_qemu" "basic_kali" {
-  name        = "basickali"
-  target_node = "pve"
-  clone       = "Kali"
-}
+#resource "proxmox_vm_qemu" "basic_kali" {
+#  name        = "basickali"
+#  target_node = "pve"
+#  clone       = "Kali"
+#}
