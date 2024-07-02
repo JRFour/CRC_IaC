@@ -40,7 +40,7 @@ jobs:
 
       - shell: bash
         run: |
-          export PM_API_TOKEN_ID=$(cat ${{ secrets.PM_API_TOKEN_B64 }} | base64 -d)
+          export TF_VAR_PM_API_TOKEN_ID=$(cat ${{ secrets.PM_API_TOKEN_B64 }} | base64 -d)
 
       - name: "Setup Terraform"
         uses: hashicorp/setup-terraform@v3
