@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+defaults:
+  run:
+    working-directory: prod
 
 jobs:
   # Runs Snyk for SCA (Software Composition Analysis) in IaC

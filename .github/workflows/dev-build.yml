@@ -1,0 +1,57 @@
+name: "Website Deployment"
+
+on:
+  push:
+    branches:
+      - dev
+defaults:
+  run:
+    working-directory: dev
+
+jobs:
+  # Runs Snyk for SCA (Software Composition Analysis) in IaC
+  snyk_sca:
+    name: "Snyk SCA Scan"
+    runs-on: [self-hosted]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Snyk to check manifest file for issues
+        uses: snyk/actions/iac@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        continue-on-error: true
+
+  terraform_build:
+    name: "Terraform AWS Build"
+    runs-on: self-hosted
+    needs: snyk_sca
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY_ID }}
+      PM_API_TOKEN_SECRET: ${{ secrets.PM_API_TOKEN_SECRET }}
+      TFVARS_B64: ${{ vars.TFVARS_B64 }}
+
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v4
+
+      - shell: bash
+        run: |
+          echo ${{ vars.TFVARS_B64 }} | base64 -d > terraform.tfvars
+
+      - name: "Setup Terraform"
+        uses: hashicorp/setup-terraform@v3
+
+      - name: "Terraform Init"
+        run: terraform init
+
+      - name: "Terraform Plan"
+        run: terraform plan -no-color
+        continue-on-error: true
+
+      - name: "Terraform Apply"
+        id: apply
+        run:  terraform apply -auto-approve
