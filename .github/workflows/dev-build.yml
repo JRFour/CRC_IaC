@@ -40,7 +40,7 @@ jobs:
 
       - shell: bash
         run: |
-          cat ${{ vars.TVARS_B64 }} | base64 -d > terraform.tfvars
+          cat ${{ vars.TFVARS_B64 }} | base64 -d > terraform.tfvars
 
       - name: "Setup Terraform"
         uses: hashicorp/setup-terraform@v3
