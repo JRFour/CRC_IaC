@@ -3,6 +3,13 @@
 # IAM User creation
 #
 #
+module "iam" {
+  source  = "terraform-aws-modules/iam/aws"
+  version = "5.39.1"
+}
+
+
+
 
 module "iam_user" {
   source = "./.terraform/modules/iam/modules/iam-user"
