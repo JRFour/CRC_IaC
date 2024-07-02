@@ -40,7 +40,7 @@ jobs:
 
       - shell: bash
         run: |
-          cat ${{ secrets.PM_API_TOKEN_B64 }} | base64 -d > terraform.tfvars
+          cat ${{ secrets.TVARS_B64 }} | base64 -d > terraform.tfvars
 
       - name: "Setup Terraform"
         uses: hashicorp/setup-terraform@v3
