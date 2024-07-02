@@ -33,7 +33,3 @@ variable "storage_size" {
   description = "Size of Proxmox CT Disk (default: 8G)"
   default = "8G"
 }
-
-variable "PM_API_TOKEN_ID" {
-  type = string
-}
