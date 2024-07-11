@@ -3,4 +3,5 @@ module "proxmox_config" {
 
 # Input variables
   environment = "dev"
+  bridge = "vmbr2"
 }
