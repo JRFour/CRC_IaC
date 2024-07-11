@@ -22,6 +22,12 @@ variable "os" {
   default = "ubuntu-22.04-standard_22.04-1_amd64.tar.zst"
 }
 
+variable "bridge" {
+  type = string
+  description = "Bridge for the Proxmox CT (default: vmbr0)"
+  default = "vmbr0"
+}
+
 variable "storage" {
   type = string
   description = "Storage Disk for Proxmox CT (default: poolboy)"
