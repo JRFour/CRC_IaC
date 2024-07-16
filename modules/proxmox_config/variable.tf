@@ -10,6 +10,12 @@ variable "environment" {
   default = "dev"
 }
 
+variable "instance" {
+  type = string
+  description = "Unique instance name suffix"
+  default = "a"
+}
+
 variable "password" {
   type = string
   description = "Password for Proxmox CT (default: admin)"

@@ -1,6 +1,6 @@
 resource "proxmox_lxc" "ct_instance" {
   target_node  = "${var.node}"
-  hostname     = "${var.environment}-ct"
+  hostname     = "${var.environment}-ct-${var.instance}"
   ostemplate   = "local:vztmpl/${var.os}" 
   password     = "${var.password}"
   unprivileged = true
