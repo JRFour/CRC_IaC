@@ -10,6 +10,12 @@ variable "environment" {
   default = "dev"
 }
 
+variable "instance" {
+  type = string
+  description = "Unique instance name suffix"
+  default = "a"
+}
+
 variable "password" {
   type = string
   description = "Password for Proxmox CT (default: admin)"
@@ -20,6 +26,12 @@ variable "os" {
   type = string
   description = "OS for the Proxmox CT (default: ubuntu)"
   default = "ubuntu-22.04-standard_22.04-1_amd64.tar.zst"
+}
+
+variable "bridge" {
+  type = string
+  description = "Bridge for the Proxmox CT (default: vmbr0)"
+  default = "vmbr0"
 }
 
 variable "storage" {

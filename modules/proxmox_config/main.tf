@@ -1,10 +1,11 @@
 resource "proxmox_lxc" "ct_instance" {
   target_node  = "${var.node}"
-  hostname     = "${var.environment}-ct"
+  hostname     = "${var.environment}-ct-${var.instance}"
   ostemplate   = "local:vztmpl/${var.os}" 
   password     = "${var.password}"
   unprivileged = true
   onboot       = true
+  start	       = true
 
 # Terraform will crash without rootfs defined
   rootfs {
@@ -14,9 +15,10 @@ resource "proxmox_lxc" "ct_instance" {
 
   network {
     name   = "eth0"
-    bridge = "vmbr0"
+    bridge = var.bridge
     ip     = "dhcp"
   }
+
 }
 
 #resource "proxmox_vm_qemu" "basic_kali" {

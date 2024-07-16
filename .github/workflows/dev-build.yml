@@ -1,4 +1,4 @@
-name: "Website Deployment"
+name: "Proxmox Deployment"
 
 on:
   push:
@@ -22,7 +22,7 @@ jobs:
         continue-on-error: true
 
   terraform_build:
-    name: "Terraform AWS Build"
+    name: "Terraform Proxmox Build"
     runs-on: self-hosted
     needs: snyk_sca
     env:

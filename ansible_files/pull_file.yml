@@ -1,0 +1,8 @@
+---
+  - hosts: control
+    tasks:
+    - name: Download leases file
+      ansible.builtin.get_url:
+        url: http://pdns:8080/dhcp.leases
+        dest: ./dhcp.leases
+        mode: '0440'
