@@ -31,6 +31,7 @@ jobs:
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY_ID }}
       AWS_REGION: us-east-1
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      DOMAIN: ${{ vars.SITE_NAME }}
     permissions:
       contents: read
       pull-requests: write
@@ -45,11 +46,11 @@ jobs:
         run: terraform init
 
       - name: "Terraform Plan"
-        run: terraform plan -var="site_domain=${{ vars.SITE_NAME }}" -no-color
+        run: terraform plan -var="site_domain=$DOMAIN" -no-color
         continue-on-error: true
 
       - name: "Terraform Apply"
-        run:  terraform apply -var="site_domain=${{ vars.SITE_NAME }}" -auto-approve
+        run:  terraform apply -var="site_domain=$DOMAIN" -auto-approve
 
   # Pushes files in 'website' folder to S3 bucket
   deploy:
@@ -57,7 +58,7 @@ jobs:
     runs-on: self-hosted
     needs: [terraform_build]  #, sonarcloud_sast]
     env:
-      domain_name: ${{ needs.terraform_build.outputs.domain_name }}
+      DOMAIN: ${{ vars.SITE_NAME }}
     steps:
       - name: "Checkout"
         uses: actions/checkout@v4
@@ -69,7 +70,7 @@ jobs:
           aws-region: us-east-1
       - name: "Sync files to S3 bucket"
         run: |
-          aws s3 sync ../website/ s3://${{ vars.SITE_NAME }} --delete
+          aws s3 sync ../website/ s3://$DOMAIN --delete
 
   # Runs OWASP ZAP Scan for web vulnerabilities
   zap_scan:
