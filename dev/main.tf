@@ -1,5 +1,5 @@
 module "pve_cfg_a" {
-  source = "../modules/proxmox_config"
+  source = "modules/proxmox_config"
 
 # Input variables
   environment = "dev"
@@ -8,7 +8,7 @@ module "pve_cfg_a" {
 }
 
 module "pve_cfg_b" {
-  source = "../modules/proxmox_config"
+  source = "modules/proxmox_config"
 
 # Input variables
   environment = "dev"
