@@ -1,4 +1,4 @@
-name: "Website Deployment"
+name: "Proxmox Deployment"
 
 on:
   push:
