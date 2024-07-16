@@ -45,11 +45,11 @@ jobs:
         run: terraform init
 
       - name: "Terraform Plan"
-        run: terraform plan -var "site_name:${{ vars.SITE_NAME }}" -no-color
+        run: terraform plan -var="site_domain=${{ vars.SITE_NAME }}" -no-color
         continue-on-error: true
 
       - name: "Terraform Apply"
-        run:  terraform apply -var "site_name:${{ vars.SITE_NAME }}" -auto-approve
+        run:  terraform apply -var="site_domain=${{ vars.SITE_NAME }}" -auto-approve
 
   # Pushes files in 'website' folder to S3 bucket
   deploy:
