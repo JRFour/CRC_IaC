@@ -7,6 +7,10 @@ on:
 defaults:
   run:
     working-directory: prod
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
 
 jobs:
   # Runs Snyk for SCA (Software Composition Analysis) in IaC
@@ -32,9 +36,6 @@ jobs:
       AWS_REGION: us-east-1
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
       DOMAIN: ${{ vars.TF_SITE_DOMAIN }}
-    permissions:
-      contents: read
-      pull-requests: write
     steps:
       - name: "Checkout"
         uses: actions/checkout@v4
