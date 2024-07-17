@@ -1,5 +1,3 @@
-[dns]
-pdns 
-
-[control]
-control ansible_connection=local
+[pve-cts]
+dev-ct-a
+dev-ct-b

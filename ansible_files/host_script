@@ -1,0 +1,8 @@
+#!/bin/bash
+
+touch dev
+echo "[pve-cts]" > dev
+while read p; do
+  hostname=$(echo "$p" |  cut -d '"' -f 2)
+  echo $hostname >> dev
+done < output.txt
