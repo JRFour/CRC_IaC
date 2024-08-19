@@ -18,7 +18,7 @@
 
 resource "proxmox_lxc" "k3s_master" {
   target_node = "pve"
-  hostname = "k3s_master"
+  hostname = "k3s-master"
 # ID of container to clone
   clone = "115"
 }
