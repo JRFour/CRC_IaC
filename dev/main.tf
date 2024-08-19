@@ -21,4 +21,9 @@ resource "proxmox_lxc" "k3s_master" {
   hostname = "k3s-master"
 # ID of container to clone
   clone = "115"
+  
+  rootfs {
+    storage = "poolboy"
+    size    = "8G"
+  }
 }
