@@ -7,5 +7,5 @@
 #}
 
 output "pve_k3s_master_hostname" {
-  value = resource.proxmox_lxc.k3s_master
+  value = resource.proxmox_lxc.k3s_master.container_name
 }
