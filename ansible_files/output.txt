@@ -1,2 +1,0 @@
-pve_cfg_a_hostname = "dev-ct-a"
-pve_cfg_b_hostname = "dev-ct-b"
