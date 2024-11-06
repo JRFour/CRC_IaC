@@ -14,4 +14,4 @@ def test_get_started_link(page: Page):
     page.get_by_role("link", name="Website").click()
 
     # Expects page to have a heading with the name of Installation.
-    expect(page.get_by_role("heading", name="RealeWanderer")).to_be_visible()
+    expect(page.get_by_role("heading", name="John Reale")).to_be_visible()
