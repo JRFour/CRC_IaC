@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
@@ -14,6 +15,14 @@
         <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+        <!-- Visitor Counter-->
+        <script>
+    		fetch('https://vcfhqc9t5b.execute-api.us-east-1.amazonaws.com/prod') 
+      		.then(response => response.json())
+      		.then((data) => {
+        	document.getElementById('visitor_counter').innerText = data.Count
+      		})
+        </script>
     </head>
     <body id="page-top">
         <!-- Navigation-->
@@ -44,10 +53,19 @@
                         <span class="text-primary">Reale</span>
                     </h1>
                     <div class="subheading mb-5">
+<<<<<<< HEAD
                         Arlington, VA 22202 · 
                         <a href="https://realewanderer.net">Website</a>
                         · 
                         <a href="mailto:jreale@realewanderer.net">Email</a>
+=======
+                        Alexandria, VA 22309 · 
+                        <a href="https://realewanderer.net">realewanderer.net</a>
+                        · 
+                        <a href="mailto:jreale@realewanderer.net">jreale@realewanderer.net</a>
+                        · Visitor Number:
+                        <span id="visitor_counter" />
+>>>>>>> 281b92c7b04f3a9011b59403075580136e445e5c
                     </div>
                     <p class="lead mb-5">I am a Senior IT professional and transitioning Military Veteran with over 7 years of advanced technical and operational training. Able to manage and supervise teams and direct day-to-day work activity. Creative, resourceful and flexible, able to adapt to changing priorities and maintain a positive attitude and strong work ethic, with a strong familiarity with Linux, SharePoint, Python, and Proxmox.</p>
                     <div class="social-icons">
