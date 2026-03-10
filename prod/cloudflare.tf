@@ -1,20 +1,14 @@
-#
-# Setting DNS records in CloudFlare
-#
-
-data "cloudflare_zones" "domain" {
-  filter {
-    name = var.site_domain
-  }
+variable "cloudflare_zone_id" {
+  type        = string
+  description = "The Cloudflare zone ID for DNS records"
+  default     = "3a7f62044f83e2a88fc3fddb3d90ca31"
 }
 
 # CNAME linking domain to AWS site via CloudFront
 resource "cloudflare_record" "site_cname" {
-  zone_id = "3a7f62044f83e2a88fc3fddb3d90ca31"
-        #data.cloudflare_zones.domain.zones[0].id
+  zone_id = var.cloudflare_zone_id
   name    = var.site_domain
   value   = aws_cloudfront_distribution.site_distribution.domain_name
-	#aws_s3_bucket_website_configuration.site.website_endpoint
   type    = "CNAME"
 
   ttl     = 1
@@ -23,7 +17,7 @@ resource "cloudflare_record" "site_cname" {
 
 # CAA record allowing AWS to recognize domain for certificate creating
 resource "cloudflare_record" "site_caa" {
- data = {
+  data = {
     flags = 0
     tag   = "issue"
     value = "amazonaws.com"
@@ -32,13 +26,12 @@ resource "cloudflare_record" "site_caa" {
   proxied = false
   ttl     = 1
   type    = "CAA"
-  zone_id = "3a7f62044f83e2a88fc3fddb3d90ca31"
+  zone_id = var.cloudflare_zone_id
 }
 
 # AWS Certificate Validation Record
 resource "cloudflare_record" "cert_record" {
-  zone_id = "3a7f62044f83e2a88fc3fddb3d90ca31"
-  #allow_overwrite = true
+  zone_id = var.cloudflare_zone_id
   ttl = 60
   
   for_each = {

@@ -1,24 +1,20 @@
 # DevOps Cloud Resume Challenge
 # Author: John Reale IV
 # Project Start: 5 May 2024
-# 
 
-#
-# Configuring the Providers called for in terraform.tf
-#
+locals {
+  mime_types = {
+    ".html" = "text/html"
+    ".png"  = "image/png"
+    ".jpg"  = "image/jpg"
+    ".gif"  = "image/gif"
+    ".css"  = "text/css"
+    ".js"   = "application/javascript"
+  }
 
-provider "aws" {
-  region = var.aws_region
+  s3_origin_id = "CRC-S3-Origin"
 }
 
-provider "cloudflare" {}
-
-
-#
-# Creating AWS S3 Static Site
-#
-
-# Bucket Setup
 resource "aws_s3_bucket" "site" {
   bucket = var.site_domain
 }
@@ -87,44 +83,13 @@ resource "aws_s3_bucket_policy" "site" {
   ]
 }
 
-locals {
-  # Mapping MIME types to file extensions
-  mime_types = {
-    ".html" = "text/html"
-    ".png"  = "image/png"
-    ".jpg"  = "image/jpg"
-    ".gif"  = "image/gif"
-    ".css"  = "text/css"
-    ".js"   = "application/javascript"
-  }
-
-  s3_origin_id = "CRC-S3-Origin"
-}
-
-# Website Files weren't uploaded to bucket - probably because it was run on HCP Terraform not locally
-## Adding website files to bucket
-#resource "aws_s3_object" "build" {
-#  for_each = fileset("../website/", "**")
-#  bucket = aws_s3_bucket.site.id
-#  key = each.value
-#  source = "../website/${each.value}"
-#  etag = filemd5("../website/${each.value}")
-#  acl = "public-read"
-#  content_type = lookup(local.mime_types, regex("\\.[^.]+$", each.key), null)
-#}
-
-
-#
-# Creating CloudFront Distribution
-#
-
 resource "aws_cloudfront_distribution" "site_distribution" {
   origin {
     domain_name = aws_s3_bucket.site.bucket_regional_domain_name
     origin_id = local.s3_origin_id
   }
 
-  aliases = ["static.realewanderer.net"]
+  aliases = [var.site_domain]
   enabled = true
   default_root_object = "index.html"
 
